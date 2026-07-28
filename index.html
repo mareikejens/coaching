@@ -229,13 +229,13 @@
   <h1>Before we start <span class="serif">building.</span></h1>
   <p class="intro">
     15 questions, about 10 minutes. This is how I prepare our first session, so we spend
-    our 45 minutes <strong>building</strong>, not talking about building.
+    our first session <strong>building</strong>, not talking about building.
     There are no bad answers here. The simplest use case is often the best one.
   </p>
   <div class="meta">
     <span>15 questions</span>
     <span>~10 min</span>
-    <span>Answers go directly to Mareike</span>
+    <span>Answers go directly (and only!) to Mareike</span>
   </div>
 
   <form id="survey" novalidate>
@@ -272,14 +272,12 @@
         <div class="q-hint">This tells me where AI can plug in later (connectors, automations).</div>
         <div class="fields" data-group="q1b">
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Google Workspace (Gmail, Drive, Docs)"><span class="opt-box"><span class="opt-mark"></span>Google Workspace (Gmail, Drive, Docs)</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Microsoft 365 (Outlook, Word, Excel)"><span class="opt-box"><span class="opt-mark"></span>Microsoft 365 (Outlook, Word, Excel)</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Microsoft 365 (Outlook, Teams, Word, Excel)"><span class="opt-box"><span class="opt-mark"></span>Microsoft 365 (Outlook, Teams, Word, Excel)</span></label>
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Slack"><span class="opt-box"><span class="opt-mark"></span>Slack</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Microsoft Teams"><span class="opt-box"><span class="opt-mark"></span>Microsoft Teams</span></label>
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Notion"><span class="opt-box"><span class="opt-mark"></span>Notion</span></label>
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Asana"><span class="opt-box"><span class="opt-mark"></span>Asana</span></label>
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Linear"><span class="opt-box"><span class="opt-mark"></span>Linear</span></label>
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Trello"><span class="opt-box"><span class="opt-mark"></span>Trello</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Sana"><span class="opt-box"><span class="opt-mark"></span>Sana</span></label>
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Ashby (or another HR/ATS tool)"><span class="opt-box"><span class="opt-mark"></span>Ashby (or another HR/ATS tool)</span></label>
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="__other__" data-other="q1b_other"><span class="opt-box"><span class="opt-mark"></span>Other</span></label>
           <input type="text" class="other-input" id="q1b_other" placeholder="What else is core to your day?">
@@ -290,7 +288,9 @@
         <div class="q-num">02</div>
         <div class="q-label">For Claude: what's your access?</div>
         <div class="fields" data-group="q2">
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Shared team account"><span class="opt-box"><span class="opt-mark"></span>Shared team account</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Shared login (one account that several people use)"><span class="opt-box"><span class="opt-mark"></span>Shared login (one account that several people use)</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Own seat on a Team plan (approx. $25-30/user/month)"><span class="opt-box"><span class="opt-mark"></span>Own seat on a Team plan (approx. $25-30/user/month)</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Own seat on an Enterprise plan"><span class="opt-box"><span class="opt-mark"></span>Own seat on an Enterprise plan</span></label>
           <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal free account ($0)"><span class="opt-box"><span class="opt-mark"></span>Personal free account ($0)</span></label>
           <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Pro plan (approx. $20/month)"><span class="opt-box"><span class="opt-mark"></span>Personal Pro plan (approx. $20/month)</span></label>
           <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Max plan (approx. $100-200/month)"><span class="opt-box"><span class="opt-mark"></span>Personal Max plan (approx. $100-200/month)</span></label>
@@ -407,9 +407,9 @@
 
       <div class="q" data-key="q11" data-required="true">
         <div class="q-num">11</div>
-        <div class="q-label">Which recurring tasks eat the most time right now? And are any of them repetitive, meaning roughly the same steps every time?</div>
+        <div class="q-label">Which recurring, repetitive tasks (roughly the same steps every time) eat the most time right now? And would you like them to be automated?</div>
         <div class="fields">
-          <textarea name="q11" placeholder="List a few. Mark the ones that follow the same steps every time."></textarea>
+          <textarea name="q11" placeholder="List a few. For each: would you want it automated, or is it actually fine by hand?"></textarea>
         </div>
       </div>
     </section>

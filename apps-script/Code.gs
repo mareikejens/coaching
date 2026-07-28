@@ -28,12 +28,14 @@ var QUESTIONS = [
     choices: ['Claude', 'ChatGPT', 'Microsoft Copilot', 'Gemini', 'Perplexity'], other: true },
 
   { key: 'q1b', title: '01b · Rest of the stack: which of these do you work in day to day?', type: 'checkbox', required: true,
-    choices: ['Google Workspace (Gmail, Drive, Docs)', 'Microsoft 365 (Outlook, Word, Excel)', 'Slack',
-              'Microsoft Teams', 'Notion', 'Asana', 'Linear', 'Trello', 'Sana', 'Ashby (or another HR/ATS tool)'],
+    choices: ['Google Workspace (Gmail, Drive, Docs)', 'Microsoft 365 (Outlook, Teams, Word, Excel)', 'Slack',
+              'Notion', 'Asana', 'Linear', 'Trello', 'Ashby (or another HR/ATS tool)'],
     other: true },
 
   { key: 'q2', title: "02 · For Claude: what's your access?", type: 'mc', required: true,
-    choices: ['Shared team account', 'Personal free account ($0)', 'Personal Pro plan (approx. $20/month)', 'Personal Max plan (approx. $100-200/month)', 'Not sure'] },
+    choices: ['Shared login (one account that several people use)', 'Own seat on a Team plan (approx. $25-30/user/month)',
+              'Own seat on an Enterprise plan', 'Personal free account ($0)', 'Personal Pro plan (approx. $20/month)',
+              'Personal Max plan (approx. $100-200/month)', 'Not sure'] },
 
   { key: 'q3', title: '03 · Which Claude surfaces and features have you used?', type: 'checkbox', required: true,
     choices: ['Claude.ai chat in the browser', 'Claude desktop app', 'Claude mobile app', 'Claude Code',
@@ -61,7 +63,7 @@ var QUESTIONS = [
 
   { key: 'q10', title: '10 · How are you currently handling sensitive data when AI is involved?', type: 'paragraph', required: true },
 
-  { key: 'q11', title: '11 · Which recurring tasks eat the most time right now? And which are repetitive (same steps every time)?', type: 'paragraph', required: true },
+  { key: 'q11', title: '11 · Which recurring, repetitive tasks eat the most time right now? And would you like them automated?', type: 'paragraph', required: true },
 
   { key: 'q12', title: '12 · How well do you understand how models like Claude work under the hood?', type: 'mc', required: true,
     choices: ['I have a solid mental model', "I know the basics but it's fuzzy", "Honestly, it's a black box to me"] },
@@ -201,7 +203,7 @@ function testSubmission() {
           name: 'Test Run',
           q1a: ['Claude', 'ChatGPT'],
           q1b: ['Google Workspace (Gmail, Drive, Docs)', 'Slack'],
-          q2: 'Shared team account',
+          q2: 'Shared login (one account that several people use)',
           q3: ['Claude.ai chat in the browser'],
           q5: ['None'],
           q6: 'Mac',
