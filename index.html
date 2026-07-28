@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Pre-Session Survey — Mareike Jens · AI Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Tokens inlined from brand-system/tokens.css — keep hex values in lockstep. */
+  :root {
+    --ink:        #0E0E0C;
+    --ink-soft:   #262420;
+    --bg:         #F5F1EA;
+    --bg-soft:    #FBF6EF;
+    --accent:     #FF5B1F;
+    --accent-ink: #1A0703;
+    --hot-pink:   #FF2E8A;
+    --lime:       #C6FF3D;
+    --muted:      #736a60;
+    --line:       #E6DFD4;
+    --font-display: "Inter Tight", system-ui, -apple-system, sans-serif;
+    --font-serif:   "Instrument Serif", Georgia, serif;
+    --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 64px 24px 96px; }
+
+  /* ── Header ─────────────────────────────────────────────── */
+  .mark { width: 48px; height: 48px; display: block; margin-bottom: 32px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-weight: 800;
+    font-size: clamp(40px, 7vw, 64px);
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    margin-bottom: 24px;
+  }
+  h1 .serif { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--accent); }
+  .intro { font-size: 19px; line-height: 1.5; color: var(--ink); max-width: 620px; }
+  .intro strong { font-weight: 600; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 8px 24px;
+    margin-top: 24px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── Sections ───────────────────────────────────────────── */
+  section { margin-top: 72px; }
+  .sec-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: 8px;
+  }
+  .sec-note { color: var(--muted); font-size: 16px; margin-top: 12px; max-width: 600px; }
+  .sec-note em { font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--ink); }
+
+  /* ── Question blocks ────────────────────────────────────── */
+  .q { margin-top: 48px; }
+  .q-num {
+    font-family: var(--font-mono);
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-num .opt { color: var(--muted); }
+  .q-label { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; max-width: 640px; }
+  .q-hint { color: var(--muted); font-size: 15.5px; margin-top: 8px; max-width: 600px; }
+  .q-hint code {
+    font-family: var(--font-mono); font-size: 13px;
+    background: var(--bg-soft); border: 1px solid var(--line); padding: 1px 5px;
+  }
+  .q-context {
+    border-left: 2px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    margin-bottom: 16px;
+    color: var(--ink);
+    font-size: 16px;
+    max-width: 600px;
+  }
+  .fields { margin-top: 16px; }
+
+  /* Choice rows (radio + checkbox) */
+  .opt-row { display: block; cursor: pointer; user-select: none; }
+  .opt-row + .opt-row { margin-top: 8px; }
+  .opt-row input { position: absolute; opacity: 0; pointer-events: none; }
+  .opt-box {
+    display: flex; align-items: center; gap: 14px;
+    border: 1px solid var(--line);
+    background: var(--bg-soft);
+    padding: 13px 16px;
+    transition: border-color 140ms cubic-bezier(.2,.7,.2,1);
+  }
+  .opt-row:hover .opt-box { border-color: var(--ink); }
+  .opt-mark {
+    flex: none; width: 18px; height: 18px;
+    border: 1.5px solid var(--ink);
+    display: grid; place-items: center;
+  }
+  .opt-row[data-kind="radio"] .opt-mark { border-radius: 999px; }
+  .opt-mark::after {
+    content: ""; width: 8px; height: 8px;
+    background: transparent;
+    transition: background 140ms cubic-bezier(.2,.7,.2,1);
+  }
+  .opt-row[data-kind="radio"] .opt-mark::after { border-radius: 999px; }
+  .opt-row input:checked ~ .opt-box { border-color: var(--accent); }
+  .opt-row input:checked ~ .opt-box .opt-mark { border-color: var(--accent); }
+  .opt-row input:checked ~ .opt-box .opt-mark::after { background: var(--accent); }
+  .opt-row input:focus-visible ~ .opt-box { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .other-input {
+    display: none; margin-top: 8px; margin-left: 33px;
+  }
+  .other-input.show { display: block; }
+
+  /* Text inputs */
+  input[type="text"], textarea {
+    width: 100%;
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    color: var(--ink);
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    padding: 13px 16px;
+    border-radius: 0;
+    transition: border-color 140ms cubic-bezier(.2,.7,.2,1);
+  }
+  textarea { min-height: 130px; resize: vertical; line-height: 1.5; }
+  textarea.tall { min-height: 170px; }
+  input[type="text"]:hover, textarea:hover { border-color: var(--ink); }
+  input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  ::placeholder { color: var(--muted); opacity: 0.7; }
+
+  /* Conditional blocks */
+  .conditional { display: none; }
+  .conditional.show { display: block; }
+  .conditional .q { margin-top: 32px; border-left: 1px solid var(--line); padding-left: 24px; }
+
+  /* Validation */
+  .q.missing .q-label { color: var(--accent); }
+  .q.missing .opt-box, .q.missing input[type="text"], .q.missing textarea { border-color: var(--accent); }
+  .error-note {
+    display: none;
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-top: 24px;
+  }
+  .error-note.show { display: block; }
+
+  /* ── Submit ─────────────────────────────────────────────── */
+  .submit-area { margin-top: 72px; padding-top: 32px; border-top: 1.5px solid var(--ink); }
+  button[type="submit"] {
+    font-family: var(--font-display);
+    font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
+    color: #fff; background: var(--ink);
+    border: none; border-radius: 999px;
+    padding: 16px 36px;
+    cursor: pointer;
+    transition: background 140ms cubic-bezier(.2,.7,.2,1);
+  }
+  button[type="submit"]:hover { background: var(--ink-soft); }
+  button[type="submit"]:disabled { opacity: 0.5; cursor: wait; }
+  .submit-hint { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 16px; }
+
+  /* ── Done / error panels ────────────────────────────────── */
+  .panel { display: none; padding: 48px 40px; margin-top: 64px; }
+  .panel.show { display: block; }
+  .panel-lime { background: var(--lime); color: var(--ink); }
+  .panel-lime h2 { font-weight: 800; font-size: clamp(32px, 5vw, 44px); letter-spacing: -0.03em; line-height: 1; }
+  .panel-lime h2 .serif { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
+  .panel-lime p { margin-top: 16px; font-size: 17px; max-width: 480px; }
+  .panel-lime .mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 32px; }
+  .panel-error { border: 1.5px solid var(--accent); background: var(--bg-soft); }
+  .panel-error h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .panel-error p { margin-top: 12px; color: var(--muted); font-size: 15.5px; }
+  .panel-error textarea { margin-top: 16px; font-family: var(--font-mono); font-size: 12px; min-height: 140px; }
+
+  /* ── Footer ─────────────────────────────────────────────── */
+  footer {
+    margin-top: 96px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; gap: 12px;
+  }
+  footer svg { width: 24px; height: 24px; }
+  footer span {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <svg class="mark" viewBox="0 0 40 40" role="img" aria-label="Mareike Jens brand mark">
+    <circle cx="22" cy="22" r="12" fill="#FF5B1F"/>
+    <circle cx="22" cy="22" r="7" fill="#FF2E8A" style="mix-blend-mode: screen;"/>
+    <circle cx="12" cy="12" r="7" fill="none" stroke="#C6FF3D" stroke-width="2.4"/>
+  </svg>
+
+  <div class="eyebrow">● AI Coaching · Pre-Session Survey</div>
+  <h1>Before we start <span class="serif">building.</span></h1>
+  <p class="intro">
+    15 questions, about 8 minutes. This is how I prepare our first session — so we spend
+    our 45 minutes <strong>building</strong>, not talking about building.
+    There are no bad answers here. The simplest use case is often the best one.
+  </p>
+  <div class="meta">
+    <span>15 questions</span>
+    <span>~8 min</span>
+    <span>Answers go directly to Mareike</span>
+  </div>
+
+  <form id="survey" novalidate>
+
+    <!-- ════════════ SECTION 1 ════════════ -->
+    <section>
+      <div class="sec-eyebrow">§01 · Tools &amp; Setup</div>
+
+      <div class="q" data-key="name" data-required="true">
+        <div class="q-num">00</div>
+        <div class="q-label">Your name</div>
+        <div class="fields">
+          <input type="text" name="name" placeholder="First name is fine">
+        </div>
+      </div>
+
+      <div class="q" data-key="q1" data-required="true">
+        <div class="q-num">01</div>
+        <div class="q-label">Which tools are you currently using, even occasionally?</div>
+        <div class="fields" data-group="q1">
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Claude"><span class="opt-box"><span class="opt-mark"></span>Claude</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="ChatGPT"><span class="opt-box"><span class="opt-mark"></span>ChatGPT</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Slack"><span class="opt-box"><span class="opt-mark"></span>Slack</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Google Drive"><span class="opt-box"><span class="opt-mark"></span>Google Drive</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Sana"><span class="opt-box"><span class="opt-mark"></span>Sana</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Ashby"><span class="opt-box"><span class="opt-mark"></span>Ashby</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="__other__" data-other="q1_other"><span class="opt-box"><span class="opt-mark"></span>Other</span></label>
+          <input type="text" class="other-input" id="q1_other" placeholder="Which one(s)?">
+        </div>
+      </div>
+
+      <div class="q" data-key="q2" data-required="true">
+        <div class="q-num">02</div>
+        <div class="q-label">For Claude — what's your access?</div>
+        <div class="fields" data-group="q2">
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Shared team account"><span class="opt-box"><span class="opt-mark"></span>Shared team account</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal free account"><span class="opt-box"><span class="opt-mark"></span>Personal free account</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Pro plan"><span class="opt-box"><span class="opt-mark"></span>Personal Pro plan</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Max plan"><span class="opt-box"><span class="opt-mark"></span>Personal Max plan</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Not sure"><span class="opt-box"><span class="opt-mark"></span>Not sure</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-key="q3" data-required="true">
+        <div class="q-num">03</div>
+        <div class="q-label">Which Claude surfaces and features have you used?</div>
+        <div class="q-hint">Check everything you've touched at least once — even briefly.</div>
+        <div class="fields" data-group="q3">
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude.ai chat in the browser"><span class="opt-box"><span class="opt-mark"></span>Claude.ai chat in the browser</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude desktop app"><span class="opt-box"><span class="opt-mark"></span>Claude desktop app</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude mobile app"><span class="opt-box"><span class="opt-mark"></span>Claude mobile app</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude Code" id="q3_code"><span class="opt-box"><span class="opt-mark"></span>Claude Code</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude Cowork"><span class="opt-box"><span class="opt-mark"></span>Claude Cowork</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude in Chrome (browser extension)"><span class="opt-box"><span class="opt-mark"></span>Claude in Chrome (browser extension)</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude for Excel / Microsoft Office"><span class="opt-box"><span class="opt-mark"></span>Claude for Excel / Microsoft Office</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude Design"><span class="opt-box"><span class="opt-mark"></span>Claude Design</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Projects (shared workspaces with knowledge)"><span class="opt-box"><span class="opt-mark"></span>Projects (shared workspaces with knowledge)</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Skills (reusable custom workflows)"><span class="opt-box"><span class="opt-mark"></span>Skills (reusable custom workflows)</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Connectors / integrations (Gmail, Drive, Calendar...)"><span class="opt-box"><span class="opt-mark"></span>Connectors / integrations (Gmail, Drive, Calendar…)</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="None of these beyond basic chat"><span class="opt-box"><span class="opt-mark"></span>None of these beyond basic chat</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="__other__" data-other="q3_other"><span class="opt-box"><span class="opt-mark"></span>Other</span></label>
+          <input type="text" class="other-input" id="q3_other" placeholder="What else?">
+        </div>
+      </div>
+
+      <!-- Conditional: only if Claude Code checked in Q3 -->
+      <div class="conditional" id="cond_code">
+        <div class="q" data-key="q4a" data-required="true">
+          <div class="q-num">04a</div>
+          <div class="q-label">What have you built or tried with Claude Code?</div>
+          <div class="fields">
+            <textarea name="q4a" placeholder="Rough notes are fine — what did you attempt, did it stick?"></textarea>
+          </div>
+        </div>
+        <div class="q" data-key="q4b" data-required="true">
+          <div class="q-num">04b</div>
+          <div class="q-label">Do you have a GitHub account?</div>
+          <div class="fields" data-group="q4b">
+            <label class="opt-row" data-kind="radio"><input type="radio" name="q4b" value="Yes"><span class="opt-box"><span class="opt-mark"></span>Yes</span></label>
+            <label class="opt-row" data-kind="radio"><input type="radio" name="q4b" value="No"><span class="opt-box"><span class="opt-mark"></span>No</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="q" data-key="q5" data-required="true">
+        <div class="q-num">05</div>
+        <div class="q-label">Do you use any automation platforms?</div>
+        <div class="fields" data-group="q5">
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q5" value="n8n"><span class="opt-box"><span class="opt-mark"></span>n8n</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q5" value="Make.com"><span class="opt-box"><span class="opt-mark"></span>Make.com</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q5" value="Zapier"><span class="opt-box"><span class="opt-mark"></span>Zapier</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q5" value="IFTTT"><span class="opt-box"><span class="opt-mark"></span>IFTTT</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q5" value="__other__" data-other="q5_other"><span class="opt-box"><span class="opt-mark"></span>Other</span></label>
+          <input type="text" class="other-input" id="q5_other" placeholder="Which one(s)?">
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q5" value="None"><span class="opt-box"><span class="opt-mark"></span>None</span></label>
+        </div>
+      </div>
+
+      <div class="q" data-key="q6" data-required="true">
+        <div class="q-num">06</div>
+        <div class="q-label">What laptop are you working on?</div>
+        <div class="fields" data-group="q6">
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q6" value="Mac"><span class="opt-box"><span class="opt-mark"></span>Mac</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q6" value="Windows"><span class="opt-box"><span class="opt-mark"></span>Windows</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q6" value="__other__" data-other="q6_other"><span class="opt-box"><span class="opt-mark"></span>Other</span></label>
+          <input type="text" class="other-input" id="q6_other" placeholder="What are you running?">
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ SECTION 2 ════════════ -->
+    <section>
+      <div class="sec-eyebrow">§02 · What's Working, What's Not</div>
+      <p class="sec-note"><em>No bad answers.</em> I don't want theory — I want the real thing, exactly as it happened. The messy version is the useful version.</p>
+
+      <div class="q" data-key="q7" data-required="true">
+        <div class="q-num">07</div>
+        <div class="q-label">What's an AI use case you're already using? When did you last use it, and which business problem does it solve for you?</div>
+        <div class="fields">
+          <textarea name="q7" placeholder="e.g. 'Yesterday — I paste candidate notes into Claude to draft rejection emails. Saves me writing each one from scratch.'"></textarea>
+        </div>
+      </div>
+
+      <div class="q" data-key="q8" data-required="true">
+        <div class="q-num">08</div>
+        <div class="q-label">Show me the real thing.</div>
+        <div class="q-hint">Paste the actual prompt(s) you used — or even better, a share link to the whole chat (in Claude: <code>Share</code> button top-right → copy link) or a copy-paste of the full conversation. Anonymize if needed. Seeing how you actually prompt tells me more than any self-assessment.</div>
+        <div class="fields">
+          <textarea name="q8" class="tall" placeholder="Prompt, share link, or full conversation — whatever is easiest."></textarea>
+        </div>
+      </div>
+
+      <div class="q" data-key="q9">
+        <div class="q-num">09 <span class="opt">· optional</span></div>
+        <div class="q-label">What have you tried that didn't work? What got in the way?</div>
+        <div class="q-hint">Same here — paste the prompt or chat if you can.</div>
+        <div class="fields">
+          <textarea name="q9" placeholder="Abandoned experiments count double."></textarea>
+        </div>
+      </div>
+
+      <div class="q" data-key="q10" data-required="true">
+        <div class="q-num">10</div>
+        <div class="q-label">You work with sensitive data — candidate info, payroll, and more. How are you currently handling it when AI is involved?</div>
+        <div class="q-hint">e.g. do you anonymize first, keep certain data out entirely, follow a team rule of thumb…?</div>
+        <div class="fields">
+          <textarea name="q10" placeholder="Describe your current approach, even if it's improvised."></textarea>
+        </div>
+      </div>
+
+      <div class="q" data-key="q11" data-required="true">
+        <div class="q-num">11</div>
+        <div class="q-label">Which recurring tasks eat the most time right now — and are any of them repetitive, meaning roughly the same steps every time?</div>
+        <div class="fields">
+          <textarea name="q11" placeholder="List a few. Mark the ones that follow the same steps every time."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ SECTION 3 ════════════ -->
+    <section>
+      <div class="sec-eyebrow">§03 · Session One &amp; Looking Ahead</div>
+
+      <div class="q" data-key="q12" data-required="true">
+        <div class="q-num">12</div>
+        <div class="q-label">How well do you understand how models like Claude actually work under the hood — neural networks, training, why they sometimes make things up?</div>
+        <div class="fields" data-group="q12">
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q12" value="I have a solid mental model"><span class="opt-box"><span class="opt-mark"></span>I have a solid mental model</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q12" value="I know the basics but it's fuzzy"><span class="opt-box"><span class="opt-mark"></span>I know the basics but it's fuzzy</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q12" value="Honestly, it's a black box to me"><span class="opt-box"><span class="opt-mark"></span>Honestly, it's a black box to me</span></label>
+        </div>
+      </div>
+
+      <!-- Conditional: only if fuzzy / black box -->
+      <div class="conditional" id="cond_theory">
+        <div class="q" data-key="q13" data-required="true">
+          <div class="q-num">13</div>
+          <div class="q-label">Would you like the technical fundamentals to be part of our coaching?</div>
+          <div class="fields" data-group="q13">
+            <label class="opt-row" data-kind="radio"><input type="radio" name="q13" value="Yes - dedicated time on this"><span class="opt-box"><span class="opt-mark"></span>Yes — dedicated time on this</span></label>
+            <label class="opt-row" data-kind="radio"><input type="radio" name="q13" value="A little context along the way is enough"><span class="opt-box"><span class="opt-mark"></span>A little context along the way is enough</span></label>
+            <label class="opt-row" data-kind="radio"><input type="radio" name="q13" value="Skip the theory - I just want to use the tools"><span class="opt-box"><span class="opt-mark"></span>Skip the theory — I just want to use the tools</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="q" data-key="q14" data-required="true">
+        <div class="q-num">14</div>
+        <div class="q-label">If you got only ONE thing out of this coaching series, what would it be?</div>
+        <div class="fields">
+          <input type="text" name="q14" placeholder="One sentence.">
+        </div>
+      </div>
+
+      <div class="q" data-key="q15" data-required="true">
+        <div class="q-num">15 <span class="opt">· homework</span></div>
+        <div class="q-context">Unless you'd prefer a different approach, my plan is that we build one concrete use case together, live, in each session — with a bit of homework in between to keep momentum. So, to hit the ground running:</div>
+        <div class="q-label">Pick the ONE use case you'd most like us to build together in session 1.</div>
+        <div class="q-hint">Describe it in 2–3 sentences — and have a real (anonymized if needed) example ready on your laptop: the actual email, doc, or spreadsheet involved.</div>
+        <div class="fields">
+          <textarea name="q15" class="tall" placeholder="What we'll build, and what real example you'll bring."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <div class="submit-area">
+      <button type="submit" id="submit-btn">Send it to Mareike →</button>
+      <div class="error-note" id="error-note">A few required questions are still open — they're marked in orange above.</div>
+      <div class="submit-hint">Your answers land directly with me. Nothing is shared further.</div>
+    </div>
+  </form>
+
+  <div class="panel panel-lime" id="done-panel">
+    <h2>Done. <span class="serif">Perfect.</span></h2>
+    <p>That's exactly what I needed. I'll read everything before we meet and tailor session 1 to your answers — including the setup instructions I'll send you beforehand.</p>
+    <div class="mono">→ See you in session 01</div>
+  </div>
+
+  <div class="panel panel-error" id="error-panel">
+    <h2>Sending failed.</h2>
+    <p>That shouldn't happen — but your answers are safe. Copy the text below and email it to <strong>mareike.jens@gmail.com</strong>, and I'll take it from there.</p>
+    <textarea readonly id="error-dump"></textarea>
+  </div>
+
+  <footer>
+    <svg viewBox="0 0 40 40" role="img" aria-label="Mareike Jens brand mark">
+      <circle cx="22" cy="22" r="12" fill="#FF5B1F"/>
+      <circle cx="22" cy="22" r="7" fill="#FF2E8A" style="mix-blend-mode: screen;"/>
+      <circle cx="12" cy="12" r="7" fill="none" stroke="#C6FF3D" stroke-width="2.4"/>
+    </svg>
+    <span>Mareike Jens · Founder &amp; AI Coach</span>
+  </footer>
+</div>
+
+<script>
+  /* ── Config ──────────────────────────────────────────────────
+     Paste the Apps Script Web App URL here after deploying
+     apps-script/Code.gs (see README.md, step 3). */
+  const WEBHOOK_URL = "";
+
+  /* ── "Other" free-text toggles ──────────────────────────── */
+  document.querySelectorAll('input[data-other]').forEach(input => {
+    const other = document.getElementById(input.dataset.other);
+    const sync = () => {
+      other.classList.toggle('show', input.checked);
+      if (input.checked) other.focus();
+      else other.value = '';
+    };
+    input.addEventListener('change', sync);
+    // Radios: also react when a sibling gets picked
+    if (input.type === 'radio') {
+      document.querySelectorAll(`input[name="${input.name}"]`).forEach(r =>
+        r.addEventListener('change', sync));
+    }
+  });
+
+  /* ── Conditional logic ──────────────────────────────────── */
+  const condCode = document.getElementById('cond_code');
+  document.querySelectorAll('input[name="q3"]').forEach(cb =>
+    cb.addEventListener('change', () => {
+      condCode.classList.toggle('show', document.getElementById('q3_code').checked);
+    }));
+
+  const condTheory = document.getElementById('cond_theory');
+  document.querySelectorAll('input[name="q12"]').forEach(r =>
+    r.addEventListener('change', () => {
+      condTheory.classList.toggle('show', r.checked && r.value !== 'I have a solid mental model');
+    }));
+
+  /* ── Collect answers ────────────────────────────────────── */
+  function collect() {
+    const data = {};
+    document.querySelectorAll('.q').forEach(q => {
+      const key = q.dataset.key;
+      if (q.closest('.conditional') && !q.closest('.conditional').classList.contains('show')) return;
+
+      const checks = q.querySelectorAll('input[type="checkbox"]');
+      const radios = q.querySelectorAll('input[type="radio"]');
+      if (checks.length) {
+        const vals = [];
+        checks.forEach(c => {
+          if (!c.checked) return;
+          if (c.value === '__other__') {
+            const txt = document.getElementById(c.dataset.other).value.trim();
+            if (txt) vals.push('Other: ' + txt);
+          } else vals.push(c.value);
+        });
+        if (vals.length) data[key] = vals;
+      } else if (radios.length) {
+        radios.forEach(r => {
+          if (!r.checked) return;
+          if (r.value === '__other__') {
+            const txt = document.getElementById(r.dataset.other).value.trim();
+            data[key] = 'Other: ' + (txt || '(not specified)');
+          } else data[key] = r.value;
+        });
+      } else {
+        const field = q.querySelector('input[type="text"], textarea');
+        if (field && field.value.trim()) data[key] = field.value.trim();
+      }
+    });
+    return data;
+  }
+
+  /* ── Validate ───────────────────────────────────────────── */
+  function validate(data) {
+    let firstMissing = null;
+    document.querySelectorAll('.q').forEach(q => {
+      q.classList.remove('missing');
+      if (q.dataset.required !== 'true') return;
+      if (q.closest('.conditional') && !q.closest('.conditional').classList.contains('show')) return;
+      if (!(q.dataset.key in data)) {
+        q.classList.add('missing');
+        if (!firstMissing) firstMissing = q;
+      }
+    });
+    return firstMissing;
+  }
+
+  /* ── Submit ─────────────────────────────────────────────── */
+  document.getElementById('survey').addEventListener('submit', async e => {
+    e.preventDefault();
+    const data = collect();
+    const missing = validate(data);
+    const errorNote = document.getElementById('error-note');
+    if (missing) {
+      errorNote.classList.add('show');
+      missing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    errorNote.classList.remove('show');
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const payload = JSON.stringify({ submittedAt: new Date().toISOString(), answers: data });
+    try {
+      if (!WEBHOOK_URL) throw new Error('WEBHOOK_URL not configured');
+      // text/plain keeps this a "simple request" — no CORS preflight,
+      // which Apps Script web apps can't answer.
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: payload,
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      document.getElementById('survey').style.display = 'none';
+      document.querySelector('.meta').style.display = 'none';
+      document.getElementById('done-panel').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      document.getElementById('error-dump').value = payload;
+      document.getElementById('error-panel').classList.add('show');
+      btn.disabled = false;
+      btn.textContent = 'Try again →';
+    }
+  });
+</script>
+</body>
+</html>
