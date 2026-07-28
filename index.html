@@ -188,7 +188,7 @@
   .submit-hint { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 16px; }
 
   /* ── Done / error panels ────────────────────────────────── */
-  .panel { display: none; padding: 48px 40px; margin-top: 64px; }
+  .panel { display: none; padding: 48px 40px; margin-top: 48px; }
   .panel.show { display: block; }
   .panel-lime { background: var(--lime); color: var(--ink); }
   .panel-lime h2 { font-weight: 800; font-size: clamp(32px, 5vw, 44px); letter-spacing: -0.03em; line-height: 1; }
@@ -489,7 +489,7 @@
       <circle cx="12" cy="12" r="7" fill="none" stroke="#C6FF3D" stroke-width="2.4"/>
     </svg>
     <span>Mareike Jens · Founder &amp; AI Coach</span>
-    <span class="footer-contact">Questions? <a href="mailto:mareike.jens@gmail.com">mareike.jens@gmail.com</a> · v6</span>
+    <span class="footer-contact">Questions? <a href="mailto:mareike.jens@gmail.com">mareike.jens@gmail.com</a> · v7</span>
   </footer>
 </div>
 
@@ -600,6 +600,9 @@
     const showDone = () => {
       document.getElementById('survey').style.display = 'none';
       document.querySelector('.meta').style.display = 'none';
+      document.querySelector('.eyebrow').style.display = 'none';
+      document.querySelector('h1').style.display = 'none';
+      document.querySelector('.intro').style.display = 'none';
       document.getElementById('error-panel').classList.remove('show');
       document.getElementById('done-panel').classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
