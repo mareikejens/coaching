@@ -132,7 +132,10 @@ function setupForm() {
  */
 function doPost(e) {
   try {
-    var payload = JSON.parse(e.postData.contents);
+    // Two transport shapes: raw JSON body (fetch path) or a form-encoded
+    // "payload" field (hidden-form fallback used when ad blockers kill fetch).
+    var raw = (e.parameter && e.parameter.payload) ? e.parameter.payload : e.postData.contents;
+    var payload = JSON.parse(raw);
     var answers = payload.answers || {};
 
     var formId = PropertiesService.getScriptProperties().getProperty('FORM_ID');

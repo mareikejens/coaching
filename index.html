@@ -596,6 +596,45 @@
     btn.textContent = 'Sending…';
 
     const payload = JSON.stringify({ submittedAt: new Date().toISOString(), answers: data });
+
+    const showDone = () => {
+      document.getElementById('survey').style.display = 'none';
+      document.querySelector('.meta').style.display = 'none';
+      document.getElementById('error-panel').classList.remove('show');
+      document.getElementById('done-panel').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    const showError = err => {
+      document.getElementById('error-dump').value = payload;
+      document.getElementById('error-reason').textContent = 'Technical detail: ' + (err && err.message ? err.message : String(err));
+      document.getElementById('error-panel').classList.add('show');
+      btn.disabled = false;
+      btn.textContent = 'Try again →';
+    };
+
+    // Fallback path: plain form POST into a hidden iframe. Not subject to
+    // CORS, survives ad blockers (Brave shields etc.) that kill the fetch.
+    // The iframe's load event = Google answered = submission stored.
+    const formPostFallback = () => new Promise((resolve, reject) => {
+      const iframe = document.createElement('iframe');
+      iframe.name = 'webhook_sink';
+      iframe.style.display = 'none';
+      const form = document.createElement('form');
+      form.action = WEBHOOK_URL;
+      form.method = 'POST';
+      form.target = 'webhook_sink';
+      form.style.display = 'none';
+      const field = document.createElement('input');
+      field.type = 'hidden';
+      field.name = 'payload';
+      field.value = payload;
+      form.appendChild(field);
+      document.body.append(iframe, form);
+      const timer = setTimeout(() => reject(new Error('Fallback submission timed out')), 12000);
+      iframe.addEventListener('load', () => { clearTimeout(timer); resolve(); });
+      form.submit();
+    });
+
     try {
       if (!WEBHOOK_URL) throw new Error('WEBHOOK_URL not configured');
       // text/plain keeps this a "simple request" — no CORS preflight,
@@ -606,16 +645,15 @@
         body: payload,
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      document.getElementById('survey').style.display = 'none';
-      document.querySelector('.meta').style.display = 'none';
-      document.getElementById('done-panel').classList.add('show');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
-      document.getElementById('error-dump').value = payload;
-      document.getElementById('error-reason').textContent = 'Technical detail: ' + (err && err.message ? err.message : String(err));
-      document.getElementById('error-panel').classList.add('show');
-      btn.disabled = false;
-      btn.textContent = 'Try again →';
+      showDone();
+    } catch (fetchErr) {
+      if (!WEBHOOK_URL) { showError(fetchErr); return; }
+      try {
+        await formPostFallback();
+        showDone();
+      } catch (fallbackErr) {
+        showError(new Error(fetchErr.message + ' / ' + fallbackErr.message));
+      }
     }
   });
 </script>
