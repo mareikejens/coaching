@@ -478,6 +478,7 @@
   <div class="panel panel-error" id="error-panel">
     <h2>Sending failed.</h2>
     <p>That shouldn't happen, but your answers are safe. Copy the text below and email it to <strong>mareike.jens@gmail.com</strong>, and I'll take it from there.</p>
+    <p id="error-reason" style="font-family: var(--font-mono); font-size: 12px; color: var(--muted);"></p>
     <textarea readonly id="error-dump"></textarea>
   </div>
 
@@ -611,6 +612,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       document.getElementById('error-dump').value = payload;
+      document.getElementById('error-reason').textContent = 'Technical detail: ' + (err && err.message ? err.message : String(err));
       document.getElementById('error-panel').classList.add('show');
       btn.disabled = false;
       btn.textContent = 'Try again →';
