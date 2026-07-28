@@ -58,6 +58,12 @@ to map, nothing is lost.
 
 - Conditional logic lives in the front end; hidden questions are simply omitted
   from the payload.
+- **Numbering convention (house rule for all surveys):** conditional follow-ups
+  take the parent's number plus a letter suffix (04a, 12a), never their own
+  integer, so the visible numbering never skips when a follow-up stays hidden.
+- After changing questions, re-run `setupForm()` (creates a fresh form,
+  re-stores its ID) and bump the web-app deployment to a new version so
+  `doPost` runs the updated code. The `/exec` URL stays the same.
 - The POST uses `Content-Type: text/plain` to stay a CORS "simple request"
   (Apps Script web apps can't answer preflights).
 - If the webhook is unreachable, the page shows the full payload for the

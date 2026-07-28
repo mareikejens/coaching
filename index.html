@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>Pre-Session Survey — Mareike Jens · AI Coaching</title>
+<title>Pre-Session Survey · Mareike Jens · AI Coaching</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -212,6 +212,8 @@
     letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--accent);
   }
+  footer .footer-contact { margin-left: auto; color: var(--muted); text-transform: none; letter-spacing: 0.06em; }
+  footer .footer-contact a { color: var(--ink); text-decoration-color: var(--accent); }
 </style>
 </head>
 <body>
@@ -226,13 +228,13 @@
   <div class="eyebrow">● AI Coaching · Pre-Session Survey</div>
   <h1>Before we start <span class="serif">building.</span></h1>
   <p class="intro">
-    15 questions, about 8 minutes. This is how I prepare our first session — so we spend
+    15 questions, about 10 minutes. This is how I prepare our first session, so we spend
     our 45 minutes <strong>building</strong>, not talking about building.
     There are no bad answers here. The simplest use case is often the best one.
   </p>
   <div class="meta">
     <span>15 questions</span>
-    <span>~8 min</span>
+    <span>~10 min</span>
     <span>Answers go directly to Mareike</span>
   </div>
 
@@ -250,29 +252,48 @@
         </div>
       </div>
 
-      <div class="q" data-key="q1" data-required="true">
-        <div class="q-num">01</div>
-        <div class="q-label">Which tools are you currently using, even occasionally?</div>
-        <div class="fields" data-group="q1">
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Claude"><span class="opt-box"><span class="opt-mark"></span>Claude</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="ChatGPT"><span class="opt-box"><span class="opt-mark"></span>ChatGPT</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Slack"><span class="opt-box"><span class="opt-mark"></span>Slack</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Google Drive"><span class="opt-box"><span class="opt-mark"></span>Google Drive</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Sana"><span class="opt-box"><span class="opt-mark"></span>Sana</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="Ashby"><span class="opt-box"><span class="opt-mark"></span>Ashby</span></label>
-          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1" value="__other__" data-other="q1_other"><span class="opt-box"><span class="opt-mark"></span>Other</span></label>
-          <input type="text" class="other-input" id="q1_other" placeholder="Which one(s)?">
+      <div class="q" data-key="q1a" data-required="true">
+        <div class="q-num">01a</div>
+        <div class="q-label">Which AI tools are you currently using, even occasionally?</div>
+        <div class="fields" data-group="q1a">
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1a" value="Claude"><span class="opt-box"><span class="opt-mark"></span>Claude</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1a" value="ChatGPT"><span class="opt-box"><span class="opt-mark"></span>ChatGPT</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1a" value="Microsoft Copilot"><span class="opt-box"><span class="opt-mark"></span>Microsoft Copilot</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1a" value="Gemini"><span class="opt-box"><span class="opt-mark"></span>Gemini</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1a" value="Perplexity"><span class="opt-box"><span class="opt-mark"></span>Perplexity</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1a" value="__other__" data-other="q1a_other"><span class="opt-box"><span class="opt-mark"></span>Other</span></label>
+          <input type="text" class="other-input" id="q1a_other" placeholder="Which one(s)?">
+        </div>
+      </div>
+
+      <div class="q" data-key="q1b" data-required="true">
+        <div class="q-num">01b</div>
+        <div class="q-label">And the rest of your stack: which of these do you work in day to day?</div>
+        <div class="q-hint">This tells me where AI can plug in later (connectors, automations).</div>
+        <div class="fields" data-group="q1b">
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Google Workspace (Gmail, Drive, Docs)"><span class="opt-box"><span class="opt-mark"></span>Google Workspace (Gmail, Drive, Docs)</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Microsoft 365 (Outlook, Word, Excel)"><span class="opt-box"><span class="opt-mark"></span>Microsoft 365 (Outlook, Word, Excel)</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Slack"><span class="opt-box"><span class="opt-mark"></span>Slack</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Microsoft Teams"><span class="opt-box"><span class="opt-mark"></span>Microsoft Teams</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Notion"><span class="opt-box"><span class="opt-mark"></span>Notion</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Asana"><span class="opt-box"><span class="opt-mark"></span>Asana</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Linear"><span class="opt-box"><span class="opt-mark"></span>Linear</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Trello"><span class="opt-box"><span class="opt-mark"></span>Trello</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Sana"><span class="opt-box"><span class="opt-mark"></span>Sana</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Ashby (or another HR/ATS tool)"><span class="opt-box"><span class="opt-mark"></span>Ashby (or another HR/ATS tool)</span></label>
+          <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="__other__" data-other="q1b_other"><span class="opt-box"><span class="opt-mark"></span>Other</span></label>
+          <input type="text" class="other-input" id="q1b_other" placeholder="What else is core to your day?">
         </div>
       </div>
 
       <div class="q" data-key="q2" data-required="true">
         <div class="q-num">02</div>
-        <div class="q-label">For Claude — what's your access?</div>
+        <div class="q-label">For Claude: what's your access?</div>
         <div class="fields" data-group="q2">
           <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Shared team account"><span class="opt-box"><span class="opt-mark"></span>Shared team account</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal free account"><span class="opt-box"><span class="opt-mark"></span>Personal free account</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Pro plan"><span class="opt-box"><span class="opt-mark"></span>Personal Pro plan</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Max plan"><span class="opt-box"><span class="opt-mark"></span>Personal Max plan</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal free account ($0)"><span class="opt-box"><span class="opt-mark"></span>Personal free account ($0)</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Pro plan (approx. $20/month)"><span class="opt-box"><span class="opt-mark"></span>Personal Pro plan (approx. $20/month)</span></label>
+          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Max plan (approx. $100-200/month)"><span class="opt-box"><span class="opt-mark"></span>Personal Max plan (approx. $100-200/month)</span></label>
           <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Not sure"><span class="opt-box"><span class="opt-mark"></span>Not sure</span></label>
         </div>
       </div>
@@ -280,7 +301,7 @@
       <div class="q" data-key="q3" data-required="true">
         <div class="q-num">03</div>
         <div class="q-label">Which Claude surfaces and features have you used?</div>
-        <div class="q-hint">Check everything you've touched at least once — even briefly.</div>
+        <div class="q-hint">Check everything you've touched at least once, even briefly.</div>
         <div class="fields" data-group="q3">
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude.ai chat in the browser"><span class="opt-box"><span class="opt-mark"></span>Claude.ai chat in the browser</span></label>
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q3" value="Claude desktop app"><span class="opt-box"><span class="opt-mark"></span>Claude desktop app</span></label>
@@ -305,7 +326,7 @@
           <div class="q-num">04a</div>
           <div class="q-label">What have you built or tried with Claude Code?</div>
           <div class="fields">
-            <textarea name="q4a" placeholder="Rough notes are fine — what did you attempt, did it stick?"></textarea>
+            <textarea name="q4a" placeholder="Rough notes are fine: what did you attempt, did it stick?"></textarea>
           </div>
         </div>
         <div class="q" data-key="q4b" data-required="true">
@@ -347,29 +368,29 @@
     <!-- ════════════ SECTION 2 ════════════ -->
     <section>
       <div class="sec-eyebrow">§02 · What's Working, What's Not</div>
-      <p class="sec-note"><em>No bad answers.</em> I don't want theory — I want the real thing, exactly as it happened. The messy version is the useful version.</p>
+      <p class="sec-note"><em>No bad answers.</em> I don't want theory. I want the real thing, exactly as it happened, and the messy version is the useful version.</p>
 
       <div class="q" data-key="q7" data-required="true">
         <div class="q-num">07</div>
         <div class="q-label">What's an AI use case you're already using? When did you last use it, and which business problem does it solve for you?</div>
         <div class="fields">
-          <textarea name="q7" placeholder="e.g. 'Yesterday — I paste candidate notes into Claude to draft rejection emails. Saves me writing each one from scratch.'"></textarea>
+          <textarea name="q7" placeholder="e.g. 'Yesterday: I paste candidate notes into Claude to draft rejection emails. Saves me writing each one from scratch.'"></textarea>
         </div>
       </div>
 
       <div class="q" data-key="q8" data-required="true">
         <div class="q-num">08</div>
         <div class="q-label">Show me the real thing.</div>
-        <div class="q-hint">Paste the actual prompt(s) you used — or even better, a share link to the whole chat (in Claude: <code>Share</code> button top-right → copy link) or a copy-paste of the full conversation. Anonymize if needed. Seeing how you actually prompt tells me more than any self-assessment.</div>
+        <div class="q-hint">Paste the actual prompt(s) you used, or even better a share link to the whole chat (in Claude: <code>Share</code> button top-right → copy link) or a copy-paste of the full conversation. Anonymize if needed. Seeing how you actually prompt tells me more than any self-assessment.</div>
         <div class="fields">
-          <textarea name="q8" class="tall" placeholder="Prompt, share link, or full conversation — whatever is easiest."></textarea>
+          <textarea name="q8" class="tall" placeholder="Prompt, share link, or full conversation. Whatever is easiest."></textarea>
         </div>
       </div>
 
-      <div class="q" data-key="q9">
-        <div class="q-num">09 <span class="opt">· optional</span></div>
+      <div class="q" data-key="q9" data-required="true">
+        <div class="q-num">09</div>
         <div class="q-label">What have you tried that didn't work? What got in the way?</div>
-        <div class="q-hint">Same here — paste the prompt or chat if you can.</div>
+        <div class="q-hint">Same here: paste the prompt or chat if you can.</div>
         <div class="fields">
           <textarea name="q9" placeholder="Abandoned experiments count double."></textarea>
         </div>
@@ -377,7 +398,7 @@
 
       <div class="q" data-key="q10" data-required="true">
         <div class="q-num">10</div>
-        <div class="q-label">You work with sensitive data — candidate info, payroll, and more. How are you currently handling it when AI is involved?</div>
+        <div class="q-label">You work with sensitive data: candidate info, payroll, and more. How are you currently handling it when AI is involved?</div>
         <div class="q-hint">e.g. do you anonymize first, keep certain data out entirely, follow a team rule of thumb…?</div>
         <div class="fields">
           <textarea name="q10" placeholder="Describe your current approach, even if it's improvised."></textarea>
@@ -386,7 +407,7 @@
 
       <div class="q" data-key="q11" data-required="true">
         <div class="q-num">11</div>
-        <div class="q-label">Which recurring tasks eat the most time right now — and are any of them repetitive, meaning roughly the same steps every time?</div>
+        <div class="q-label">Which recurring tasks eat the most time right now? And are any of them repetitive, meaning roughly the same steps every time?</div>
         <div class="fields">
           <textarea name="q11" placeholder="List a few. Mark the ones that follow the same steps every time."></textarea>
         </div>
@@ -399,7 +420,7 @@
 
       <div class="q" data-key="q12" data-required="true">
         <div class="q-num">12</div>
-        <div class="q-label">How well do you understand how models like Claude actually work under the hood — neural networks, training, why they sometimes make things up?</div>
+        <div class="q-label">How well do you understand how models like Claude actually work under the hood (neural networks, training, why they sometimes make things up)?</div>
         <div class="fields" data-group="q12">
           <label class="opt-row" data-kind="radio"><input type="radio" name="q12" value="I have a solid mental model"><span class="opt-box"><span class="opt-mark"></span>I have a solid mental model</span></label>
           <label class="opt-row" data-kind="radio"><input type="radio" name="q12" value="I know the basics but it's fuzzy"><span class="opt-box"><span class="opt-mark"></span>I know the basics but it's fuzzy</span></label>
@@ -407,54 +428,56 @@
         </div>
       </div>
 
-      <!-- Conditional: only if fuzzy / black box -->
+      <!-- Conditional: only if fuzzy / black box. Numbered 12a (not 13) so the
+           visible numbering never skips when it's hidden — house convention
+           for all conditional follow-ups. -->
       <div class="conditional" id="cond_theory">
-        <div class="q" data-key="q13" data-required="true">
-          <div class="q-num">13</div>
+        <div class="q" data-key="q12a" data-required="true">
+          <div class="q-num">12a</div>
           <div class="q-label">Would you like the technical fundamentals to be part of our coaching?</div>
-          <div class="fields" data-group="q13">
-            <label class="opt-row" data-kind="radio"><input type="radio" name="q13" value="Yes - dedicated time on this"><span class="opt-box"><span class="opt-mark"></span>Yes — dedicated time on this</span></label>
-            <label class="opt-row" data-kind="radio"><input type="radio" name="q13" value="A little context along the way is enough"><span class="opt-box"><span class="opt-mark"></span>A little context along the way is enough</span></label>
-            <label class="opt-row" data-kind="radio"><input type="radio" name="q13" value="Skip the theory - I just want to use the tools"><span class="opt-box"><span class="opt-mark"></span>Skip the theory — I just want to use the tools</span></label>
+          <div class="fields" data-group="q12a">
+            <label class="opt-row" data-kind="radio"><input type="radio" name="q12a" value="Yes - dedicated time on this"><span class="opt-box"><span class="opt-mark"></span>Yes, dedicated time on this</span></label>
+            <label class="opt-row" data-kind="radio"><input type="radio" name="q12a" value="A little context along the way is enough"><span class="opt-box"><span class="opt-mark"></span>A little context along the way is enough</span></label>
+            <label class="opt-row" data-kind="radio"><input type="radio" name="q12a" value="Skip the theory - I just want to use the tools"><span class="opt-box"><span class="opt-mark"></span>Skip the theory, I just want to use the tools</span></label>
           </div>
         </div>
       </div>
 
-      <div class="q" data-key="q14" data-required="true">
-        <div class="q-num">14</div>
+      <div class="q" data-key="q13" data-required="true">
+        <div class="q-num">13</div>
         <div class="q-label">If you got only ONE thing out of this coaching series, what would it be?</div>
         <div class="fields">
-          <input type="text" name="q14" placeholder="One sentence.">
+          <input type="text" name="q13" placeholder="One sentence.">
         </div>
       </div>
 
-      <div class="q" data-key="q15" data-required="true">
-        <div class="q-num">15 <span class="opt">· homework</span></div>
-        <div class="q-context">Unless you'd prefer a different approach, my plan is that we build one concrete use case together, live, in each session — with a bit of homework in between to keep momentum. So, to hit the ground running:</div>
+      <div class="q" data-key="q14" data-required="true">
+        <div class="q-num">14 <span class="opt">· homework</span></div>
+        <div class="q-context">Unless you'd prefer a different approach, my plan is that we build one concrete use case together, live, in each session, with a bit of homework in between to keep momentum. So, to hit the ground running:</div>
         <div class="q-label">Pick the ONE use case you'd most like us to build together in session 1.</div>
-        <div class="q-hint">Describe it in 2–3 sentences — and have a real (anonymized if needed) example ready on your laptop: the actual email, doc, or spreadsheet involved.</div>
+        <div class="q-hint">Describe it in 2-3 sentences, and have a real (anonymized if needed) example ready on your laptop: the actual email, doc, or spreadsheet involved.</div>
         <div class="fields">
-          <textarea name="q15" class="tall" placeholder="What we'll build, and what real example you'll bring."></textarea>
+          <textarea name="q14" class="tall" placeholder="What we'll build, and what real example you'll bring."></textarea>
         </div>
       </div>
     </section>
 
     <div class="submit-area">
       <button type="submit" id="submit-btn">Send it to Mareike →</button>
-      <div class="error-note" id="error-note">A few required questions are still open — they're marked in orange above.</div>
+      <div class="error-note" id="error-note">A few required questions are still open. They're marked in orange above.</div>
       <div class="submit-hint">Your answers land directly with me. Nothing is shared further.</div>
     </div>
   </form>
 
   <div class="panel panel-lime" id="done-panel">
     <h2>Done. <span class="serif">Perfect.</span></h2>
-    <p>That's exactly what I needed. I'll read everything before we meet and tailor session 1 to your answers — including the setup instructions I'll send you beforehand.</p>
+    <p>That's exactly what I needed. I'll read everything before we meet and tailor session 1 to your answers, including the setup instructions I'll send you beforehand.</p>
     <div class="mono">→ See you in session 01</div>
   </div>
 
   <div class="panel panel-error" id="error-panel">
     <h2>Sending failed.</h2>
-    <p>That shouldn't happen — but your answers are safe. Copy the text below and email it to <strong>mareike.jens@gmail.com</strong>, and I'll take it from there.</p>
+    <p>That shouldn't happen, but your answers are safe. Copy the text below and email it to <strong>mareike.jens@gmail.com</strong>, and I'll take it from there.</p>
     <textarea readonly id="error-dump"></textarea>
   </div>
 
@@ -465,6 +488,7 @@
       <circle cx="12" cy="12" r="7" fill="none" stroke="#C6FF3D" stroke-width="2.4"/>
     </svg>
     <span>Mareike Jens · Founder &amp; AI Coach</span>
+    <span class="footer-contact">Questions? <a href="mailto:mareike.jens@gmail.com">mareike.jens@gmail.com</a></span>
   </footer>
 </div>
 
