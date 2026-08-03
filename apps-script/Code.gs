@@ -80,6 +80,13 @@ var QUESTIONS = [
 
 var RAW_ITEM_TITLE = 'Raw submission (JSON, auto-filled, ignore)';
 
+/** Where submission copies and failure alerts go. Empty = the script owner. */
+var NOTIFY_EMAIL = '';
+
+function notifyAddress_() {
+  return NOTIFY_EMAIL || Session.getEffectiveUser().getEmail();
+}
+
 /**
  * Run this once from the Apps Script editor (select `setupForm`, hit Run).
  * Creates the Form, stores its ID, and logs both URLs.
@@ -131,11 +138,13 @@ function setupForm() {
  *   { submittedAt: "...", answers: { name: "...", q1: [...], q2: "...", ... } }
  */
 function doPost(e) {
+  var incoming = '';
   try {
     // Two transport shapes: raw JSON body (fetch path) or a form-encoded
     // "payload" field (hidden-form fallback used when ad blockers kill fetch).
-    var raw = (e.parameter && e.parameter.payload) ? e.parameter.payload : e.postData.contents;
-    var payload = JSON.parse(raw);
+    incoming = (e.parameter && e.parameter.payload) ? e.parameter.payload
+             : (e.postData && e.postData.contents) || '';
+    var payload = JSON.parse(incoming);
     var answers = payload.answers || {};
 
     var formId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
@@ -186,10 +195,40 @@ function doPost(e) {
 
     response.submit();
 
+    // Copy every successful submission to the inbox: instant heads-up plus a
+    // second permanent record, independent of the Form/Sheet.
+    try {
+      MailApp.sendEmail(
+        notifyAddress_(),
+        'Survey received: ' + (answers.name || '(no name)'),
+        'A pre-session survey submission just landed in the Google Form.\n\n' +
+        (mappingErrors.length ? 'Mapping errors: ' + mappingErrors.join('; ') + '\n\n' : '') +
+        incoming
+      );
+    } catch (mailErr) { /* notification is best-effort; the response is stored */ }
+
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true, mappingErrors: mappingErrors }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
+    // LAST-RESORT SAFETY NET: the Form write failed, so the payload exists
+    // nowhere else. Preserve it twice before answering — email and Drive —
+    // each independently, so one failing doesn't take down the other.
+    try {
+      MailApp.sendEmail(
+        notifyAddress_(),
+        'SURVEY SUBMISSION FAILED — raw answers inside',
+        'doPost error: ' + err.message + '\n\nRaw payload:\n\n' + (incoming || '(empty body)')
+      );
+    } catch (mailErr) {}
+    try {
+      DriveApp.createFile(
+        'survey-failed-submission-' + new Date().toISOString() + '.json',
+        'doPost error: ' + err.message + '\n\n' + (incoming || '(empty body)'),
+        MimeType.PLAIN_TEXT
+      );
+    } catch (driveErr) {}
+
     return ContentService
       .createTextOutput(JSON.stringify({ ok: false, error: err.message }))
       .setMimeType(ContentService.MimeType.JSON);

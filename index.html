@@ -472,6 +472,10 @@
   <div class="panel panel-lime" id="done-panel">
     <h2>Done. <span class="serif">Perfect.</span></h2>
     <p>That's exactly what I needed. I'll read everything before we meet and tailor session 1 to your answers, including the setup instructions I'll send you beforehand.</p>
+    <div id="done-unverified" style="display: none;">
+      <p><strong>One extra safety step:</strong> your browser sent the answers over a backup route, so the page can't confirm they arrived. To make sure nothing gets lost, please copy the text below and email it to <strong>mareike.jens@gmail.com</strong> as well.</p>
+      <textarea readonly id="done-dump" style="width: 100%; margin-top: 16px; font-family: var(--font-mono); font-size: 12px; min-height: 140px; resize: vertical;"></textarea>
+    </div>
     <div class="mono">→ See you in session 01</div>
   </div>
 
@@ -489,7 +493,7 @@
       <circle cx="12" cy="12" r="7" fill="none" stroke="#C6FF3D" stroke-width="2.4"/>
     </svg>
     <span>Mareike Jens · Founder &amp; AI Coach</span>
-    <span class="footer-contact">Questions? <a href="mailto:mareike.jens@gmail.com">mareike.jens@gmail.com</a> · v7</span>
+    <span class="footer-contact">Questions? <a href="mailto:mareike.jens@gmail.com">mareike.jens@gmail.com</a> · v8</span>
   </footer>
 </div>
 
@@ -597,13 +601,25 @@
 
     const payload = JSON.stringify({ submittedAt: new Date().toISOString(), answers: data });
 
-    const showDone = () => {
+    // Local backup: survives a closed tab, so answers are recoverable from
+    // this browser (DevTools → Application → Local Storage) even if delivery
+    // silently fails. Private-mode storage may be unavailable — best effort.
+    try { localStorage.setItem('mj-survey-backup-' + Date.now(), payload); } catch (_) {}
+
+    // `verified` = the webhook itself answered {ok:true}. The iframe fallback
+    // can't read Google's reply, so it can never verify — in that case the
+    // success panel also shows the answers with an email-me-a-copy ask.
+    const showDone = verified => {
       document.getElementById('survey').style.display = 'none';
       document.querySelector('.meta').style.display = 'none';
       document.querySelector('.eyebrow').style.display = 'none';
       document.querySelector('h1').style.display = 'none';
       document.querySelector('.intro').style.display = 'none';
       document.getElementById('error-panel').classList.remove('show');
+      if (!verified) {
+        document.getElementById('done-unverified').style.display = 'block';
+        document.getElementById('done-dump').value = payload;
+      }
       document.getElementById('done-panel').classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -648,12 +664,20 @@
         body: payload,
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
-      showDone();
+      // HTTP 200 alone proves nothing: Apps Script answers 200 even when
+      // doPost fails, and a Google login/error page is also a 200. Only the
+      // webhook's own {ok:true} counts as delivered.
+      const text = await res.text();
+      let reply;
+      try { reply = JSON.parse(text); }
+      catch (_) { throw new Error('Reply was not from the webhook (got a Google login or error page?)'); }
+      if (!reply.ok) throw new Error('Webhook error: ' + (reply.error || 'unknown'));
+      showDone(true);
     } catch (fetchErr) {
       if (!WEBHOOK_URL) { showError(fetchErr); return; }
       try {
         await formPostFallback();
-        showDone();
+        showDone(false);
       } catch (fallbackErr) {
         showError(new Error(fetchErr.message + ' / ' + fallbackErr.message));
       }

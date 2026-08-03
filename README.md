@@ -47,6 +47,24 @@ submissions go straight to the private Google Form backend.
 
 6. **Test end to end.** Open the Pages URL, submit a test run (name it "Test"),
    check it lands in the Form's Responses tab.
+   **Always test twice: once normally, and once in a private/incognito window
+   where you are NOT signed in to Google.** With "Who has access" set to
+   anything stricter than **Anyone**, submissions from signed-in users (you)
+   succeed while submissions from everyone else silently die on a Google
+   login page — the exact failure this repo has already been bitten by.
+
+## Updating the webhook code (after changing Code.gs)
+
+Pasting new code into the editor is not enough — the live `/exec` URL keeps
+running the old version until you bump the deployment:
+
+1. Paste the new `Code.gs` contents over the old ones, save.
+2. **Deploy → Manage deployments → ✎ (edit) → Version: New version → Deploy.**
+   The `/exec` URL stays the same; no front-end change needed.
+3. Confirm **Who has access: Anyone** while you're in that dialog.
+4. Re-authorize when prompted — the failure-safety-net code needs the
+   "send email as you" and Drive scopes the old version didn't use.
+5. Re-run the end-to-end test, including the incognito variant above.
 
 ## Reading responses
 
@@ -68,3 +86,15 @@ to map, nothing is lost.
   (Apps Script web apps can't answer preflights).
 - If the webhook is unreachable, the page shows the full payload for the
   respondent to copy-paste into an email — no answer is lost.
+- **Success is only trusted when the webhook itself replies `{ok:true}`.**
+  An HTTP 200 alone proves nothing: Apps Script answers 200 even when
+  `doPost` throws, and a Google login page is also a 200. The iframe
+  fallback can't read Google's reply at all, so after a fallback submit the
+  success panel additionally shows the answers and asks the respondent to
+  email a copy.
+- Every submit attempt is also written to the respondent's `localStorage`
+  (keys starting `mj-survey-backup-`), recoverable via DevTools →
+  Application → Local Storage even after the tab is closed.
+- Server-side, `doPost` never discards a payload: a successful Form write
+  emails a copy to the owner; a failed one emails the raw payload AND drops
+  it as a `survey-failed-submission-*.json` file in Drive.
