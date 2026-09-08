@@ -151,6 +151,8 @@
     transition: border-color 140ms cubic-bezier(.2,.7,.2,1);
   }
   textarea { min-height: 130px; resize: vertical; line-height: 1.5; }
+  .name-fields { display: flex; gap: 12px; }
+  .name-fields input { flex: 1; }
   textarea.tall { min-height: 170px; }
   input[type="text"]:hover, textarea:hover { border-color: var(--ink); }
   input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--accent); }
@@ -228,12 +230,12 @@
   <div class="eyebrow">● AI Coaching · Pre-Session Survey</div>
   <h1>Before we start <span class="serif">building.</span></h1>
   <p class="intro">
-    15 questions, about 10 minutes. This is how I prepare our first session, so we spend
-    our first session <strong>building</strong>, not talking about building.
-    There are no bad answers here. The simplest use case is often the best one.
+    Quick survey to prepare our first session, so we spend
+    our first session already <strong>building</strong>, not only talking.
+    There are no bad answers here. Looking forward!
   </p>
   <div class="meta">
-    <span>15 questions</span>
+    <span>12 questions</span>
     <span>~10 min</span>
     <span>Answers go directly (and only!) to Mareike</span>
   </div>
@@ -247,8 +249,9 @@
       <div class="q" data-key="name" data-required="true">
         <div class="q-num">00</div>
         <div class="q-label">Your name</div>
-        <div class="fields">
-          <input type="text" name="name" placeholder="First name is fine">
+        <div class="fields name-fields">
+          <input type="text" id="firstName" placeholder="First name">
+          <input type="text" id="lastName" placeholder="Last name">
         </div>
       </div>
 
@@ -268,7 +271,7 @@
 
       <div class="q" data-key="q1b" data-required="true">
         <div class="q-num">01b</div>
-        <div class="q-label">And the rest of your stack: which of these do you work in day to day?</div>
+        <div class="q-label">And the rest of your stack: which of these do you primarily work in day to day?</div>
         <div class="q-hint">This tells me where AI can plug in later (connectors, automations).</div>
         <div class="fields" data-group="q1b">
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q1b" value="Google Workspace (Gmail, Drive, Docs)"><span class="opt-box"><span class="opt-mark"></span>Google Workspace (Gmail, Drive, Docs)</span></label>
@@ -284,22 +287,8 @@
         </div>
       </div>
 
-      <div class="q" data-key="q2" data-required="true">
-        <div class="q-num">02</div>
-        <div class="q-label">For Claude: what's your access?</div>
-        <div class="fields" data-group="q2">
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Shared login (one account that several people use)"><span class="opt-box"><span class="opt-mark"></span>Shared login (one account that several people use)</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Own seat on a Team plan (approx. $25-30/user/month)"><span class="opt-box"><span class="opt-mark"></span>Own seat on a Team plan (approx. $25-30/user/month)</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Own seat on an Enterprise plan"><span class="opt-box"><span class="opt-mark"></span>Own seat on an Enterprise plan</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal free account ($0)"><span class="opt-box"><span class="opt-mark"></span>Personal free account ($0)</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Pro plan (approx. $20/month)"><span class="opt-box"><span class="opt-mark"></span>Personal Pro plan (approx. $20/month)</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Personal Max plan (approx. $100-200/month)"><span class="opt-box"><span class="opt-mark"></span>Personal Max plan (approx. $100-200/month)</span></label>
-          <label class="opt-row" data-kind="radio"><input type="radio" name="q2" value="Not sure"><span class="opt-box"><span class="opt-mark"></span>Not sure</span></label>
-        </div>
-      </div>
-
       <div class="q" data-key="q3" data-required="true">
-        <div class="q-num">03</div>
+        <div class="q-num">02</div>
         <div class="q-label">Which Claude surfaces and features have you used?</div>
         <div class="q-hint">Check everything you've touched at least once, even briefly.</div>
         <div class="fields" data-group="q3">
@@ -323,14 +312,14 @@
       <!-- Conditional: only if Claude Code checked in Q3 -->
       <div class="conditional" id="cond_code">
         <div class="q" data-key="q4a" data-required="true">
-          <div class="q-num">04a</div>
+          <div class="q-num">02a</div>
           <div class="q-label">What have you built or tried with Claude Code?</div>
           <div class="fields">
             <textarea name="q4a" placeholder="Rough notes are fine: what did you attempt, did it stick?"></textarea>
           </div>
         </div>
         <div class="q" data-key="q4b" data-required="true">
-          <div class="q-num">04b</div>
+          <div class="q-num">02b</div>
           <div class="q-label">Do you have a GitHub account?</div>
           <div class="fields" data-group="q4b">
             <label class="opt-row" data-kind="radio"><input type="radio" name="q4b" value="Yes"><span class="opt-box"><span class="opt-mark"></span>Yes</span></label>
@@ -340,7 +329,7 @@
       </div>
 
       <div class="q" data-key="q5" data-required="true">
-        <div class="q-num">05</div>
+        <div class="q-num">03</div>
         <div class="q-label">Do you use any automation platforms?</div>
         <div class="fields" data-group="q5">
           <label class="opt-row" data-kind="check"><input type="checkbox" name="q5" value="n8n"><span class="opt-box"><span class="opt-mark"></span>n8n</span></label>
@@ -354,7 +343,7 @@
       </div>
 
       <div class="q" data-key="q6" data-required="true">
-        <div class="q-num">06</div>
+        <div class="q-num">04</div>
         <div class="q-label">What laptop are you working on?</div>
         <div class="fields" data-group="q6">
           <label class="opt-row" data-kind="radio"><input type="radio" name="q6" value="Mac"><span class="opt-box"><span class="opt-mark"></span>Mac</span></label>
@@ -371,7 +360,7 @@
       <p class="sec-note"><em>No bad answers.</em> I don't want theory. I want the real thing, exactly as it happened, and the messy version is the useful version.</p>
 
       <div class="q" data-key="q7" data-required="true">
-        <div class="q-num">07</div>
+        <div class="q-num">05</div>
         <div class="q-label">What's an AI use case you're already using? When did you last use it, and which business problem does it solve for you?</div>
         <div class="fields">
           <textarea name="q7" placeholder="e.g. 'Yesterday: I paste candidate notes into Claude to draft rejection emails. Saves me writing each one from scratch.'"></textarea>
@@ -379,7 +368,7 @@
       </div>
 
       <div class="q" data-key="q8" data-required="true">
-        <div class="q-num">08</div>
+        <div class="q-num">06</div>
         <div class="q-label">Show me the real thing.</div>
         <div class="q-hint">Paste the actual prompt(s) you used, or even better a share link to the whole chat (in Claude: <code>Share</code> button top-right → copy link) or a copy-paste of the full conversation. Anonymize if needed. Seeing how you actually prompt tells me more than any self-assessment.</div>
         <div class="fields">
@@ -388,7 +377,7 @@
       </div>
 
       <div class="q" data-key="q9" data-required="true">
-        <div class="q-num">09</div>
+        <div class="q-num">07</div>
         <div class="q-label">What have you tried that didn't work? What got in the way?</div>
         <div class="q-hint">Same here: paste the prompt or chat if you can.</div>
         <div class="fields">
@@ -396,22 +385,6 @@
         </div>
       </div>
 
-      <div class="q" data-key="q10" data-required="true">
-        <div class="q-num">10</div>
-        <div class="q-label">You work with sensitive data: candidate info, payroll, and more. How are you currently handling it when AI is involved?</div>
-        <div class="q-hint">e.g. do you anonymize first, keep certain data out entirely, follow a team rule of thumb…?</div>
-        <div class="fields">
-          <textarea name="q10" placeholder="Describe your current approach, even if it's improvised."></textarea>
-        </div>
-      </div>
-
-      <div class="q" data-key="q11" data-required="true">
-        <div class="q-num">11</div>
-        <div class="q-label">Which recurring, repetitive tasks (roughly the same steps every time) eat the most time right now? And would you like them to be automated?</div>
-        <div class="fields">
-          <textarea name="q11" placeholder="List a few. For each: would you want it automated, or is it actually fine by hand?"></textarea>
-        </div>
-      </div>
     </section>
 
     <!-- ════════════ SECTION 3 ════════════ -->
@@ -419,7 +392,7 @@
       <div class="sec-eyebrow">§03 · Session One &amp; Looking Ahead</div>
 
       <div class="q" data-key="q12" data-required="true">
-        <div class="q-num">12</div>
+        <div class="q-num">08</div>
         <div class="q-label">How well do you understand how models like Claude actually work under the hood (neural networks, training, why they sometimes make things up)?</div>
         <div class="fields" data-group="q12">
           <label class="opt-row" data-kind="radio"><input type="radio" name="q12" value="I have a solid mental model"><span class="opt-box"><span class="opt-mark"></span>I have a solid mental model</span></label>
@@ -433,7 +406,7 @@
            for all conditional follow-ups. -->
       <div class="conditional" id="cond_theory">
         <div class="q" data-key="q12a" data-required="true">
-          <div class="q-num">12a</div>
+          <div class="q-num">08a</div>
           <div class="q-label">Would you like the technical fundamentals to be part of our coaching?</div>
           <div class="fields" data-group="q12a">
             <label class="opt-row" data-kind="radio"><input type="radio" name="q12a" value="Yes - dedicated time on this"><span class="opt-box"><span class="opt-mark"></span>Yes, dedicated time on this</span></label>
@@ -444,7 +417,7 @@
       </div>
 
       <div class="q" data-key="q13" data-required="true">
-        <div class="q-num">13</div>
+        <div class="q-num">09</div>
         <div class="q-label">If you got only ONE thing out of this coaching series, what would it be?</div>
         <div class="fields">
           <input type="text" name="q13" placeholder="One sentence.">
@@ -452,7 +425,7 @@
       </div>
 
       <div class="q" data-key="q14" data-required="true">
-        <div class="q-num">14 <span class="opt">· homework</span></div>
+        <div class="q-num">10 <span class="opt">· homework</span></div>
         <div class="q-context">Unless you'd prefer a different approach, my plan is that we build one concrete use case together, live, in each session, with a bit of homework in between to keep momentum. So, to hit the ground running:</div>
         <div class="q-label">Pick the ONE use case you'd most like us to build together in session 1.</div>
         <div class="q-hint">Describe it in 2-3 sentences, and have a real (anonymized if needed) example ready on your laptop: the actual email, doc, or spreadsheet involved.</div>
@@ -493,7 +466,7 @@
       <circle cx="12" cy="12" r="7" fill="none" stroke="#C6FF3D" stroke-width="2.4"/>
     </svg>
     <span>Mareike Jens · Founder &amp; AI Coach</span>
-    <span class="footer-contact">Questions? <a href="mailto:mareike.jens@gmail.com">mareike.jens@gmail.com</a> · v8</span>
+    <span class="footer-contact">Questions? <a href="mailto:mareike.jens@gmail.com">mareike.jens@gmail.com</a> · v9</span>
   </footer>
 </div>
 
@@ -538,6 +511,13 @@
     document.querySelectorAll('.q').forEach(q => {
       const key = q.dataset.key;
       if (q.closest('.conditional') && !q.closest('.conditional').classList.contains('show')) return;
+
+      if (key === 'name') {
+        const first = document.getElementById('firstName').value.trim();
+        const last = document.getElementById('lastName').value.trim();
+        if (first && last) data[key] = first + ' ' + last;
+        return;
+      }
 
       const checks = q.querySelectorAll('input[type="checkbox"]');
       const radios = q.querySelectorAll('input[type="radio"]');
